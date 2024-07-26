@@ -23,7 +23,7 @@ public class ProveedorControlador {
 
     @GetMapping("/registrar")
     public String registrar() {
-        return "proveedor_form.html"; // autor_form
+        return "proveedor_form.html"; // proveedor_form
     }
 
     // FUNCIONALIDAD REGISTRAR PROVEEDOR
