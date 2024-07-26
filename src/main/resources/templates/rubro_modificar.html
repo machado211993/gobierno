@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Despensa La Alcancia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navBar">
+    <div class="container">
+      <a th:href="@{/}" class="navbar-brand d-flex align-items-center" id="navbar-logo">
+        <img th:src="@{/img/alcancia.png}" width="100px" height="auto" alt="Img logo egg" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        Menú <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">  
+          <li class="nav-item" th:if="${session.usuariosession == null}">
+            <a class="nav-link" th:href="@{/footer/about}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+              Acerca de
+            </a>
+          </li>
+          <li class="nav-item" th:if="${session.usuariosession == null}">
+            <a class="nav-link" href="" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+              Quienes Somos
+            </a>
+          </li>
+          <li class="nav-item dropdown" th:if="${session.usuariosession == null}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Contactos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/producto/registrar}">Crear
+                  Contacto</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/producto/lista}">Listar Contactos</a>
+              </li>
+            </ul>
+          </li>    
+          <li class="nav-item dropdown" th:if="${session.usuariosession == null}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOfertas" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Obras
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownOfertas">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/oferta/registrar}">Crear
+                  Obras</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/oferta/lista}">Listar Obras</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown" th:if="${session.usuariosession == null}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Eventos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/producto/registrar}">Crear
+                  Evento</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/producto/lista}">Listar Eventos</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown" th:if="${session.usuariosession == null}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Actos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/producto/registrar}">Crear
+                  Actos</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/producto/lista}">Listar Actos</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown" th:if="${session.usuariosession == null}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Avisos Importantes
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/producto/registrar}">Crear
+                  aviso importante</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/producto/lista}">Listar avisos importantes</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+            <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ADMIN')" href="#" id="navbarDropdownProveedores"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Horario
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProveedores">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/proveedor/registrar}">Crear
+                  Horario</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/proveedor/lista}">Listar Horario</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+            <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ADMIN')" href="#" id="navbarDropdownRubros"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Lugar
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownRubros">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/rubro/registrar}">Crear Lugar</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/rubro/lista}">Listar Lugar</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+            <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ADMIN')" href="#" id="navbarDropdownClientes"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Clientes
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownClientes">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/registrar}">Registrar clientes</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/listarUsuarios}">Listar Clientes</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPerfil" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Perfil
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownPerfil">
+              <li>
+                <a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item" th:if="${session.usuariosession == null}">
+            <a class="nav-link" href="/registrar" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+              Registrate
+            </a>
+          </li>
+          <li class="nav-item" th:if="${session.usuariosession == null}">
+            <a class="nav-link" href="/login" id="navbarDropdownLogin" role="button" aria-expanded="false">
+              Login
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <form class="formulario" th:action="@{/rubro/modificar/__${rubro.idRubro}__}" method="POST">
+
+    <input hidden th:value="${idRubro}" name="idRubro">
+
+    <div class="form-group my-3">
+
+      <label class="mb-2">Cargar Rubro</label>
+
+      <input th:value="${rubro.nombre}" type="text" class="form-control" name="nombre">
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3 botones">Actualizar</button>
+
+  </form>
+  <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+    <div class="card-body">
+      <h5 class="card-title">Exito 👍</h5>
+      <p class="card-text" th:text="${exito}"></p>
+    </div>
+  </div>
+  <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+    <div class="card-body">
+      <h5 class="card-title">Error 👎</h5>
+      <p class="card-text" th:text="${error}"></p>
+    </div>
+  </div>
+  <section class=" text-center container">
+    <div class="row mt-3">
+      <div class="divVolver">
+        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+      </div>
+    </div>
+  </section>
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <symbol id="facebook" viewBox="0 0 16 16">
+        <path
+          d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+      </symbol>
+      <symbol id="instagram" viewBox="0 0 16 16">
+        <path
+          d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+      </symbol>
+      <symbol id="twitter" viewBox="0 0 16 16">
+        <path
+          d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+      </symbol>
+
+      <!-- Símbolo de Gmail -->
+      <symbol id="gmail" viewBox="0 0 48 48" width="48" height="48" style="fill: #4285f4">
+        <path
+          d="M23.49 14.69v3.62H31v-3.62c0-3.52-2-5.16-4.87-5.16-2.23 0-4.49.79-4.49 2.3v3.62H15v3.98h3.63v9.63c0 1.01.08 1.79.28 2.36h4.18c-.22 1.18-1.22 3.65-4.18 3.65-2.5 0-4.52-2.06-4.52-4.6s2.02-4.6 4.52-4.6c1.79 0 2.36 1.35 2.47 2.23h4.5l-.59-3.98h-3.06v-2.54H31zm-4.62-1.23c0-.63.04-1.23.09-1.77H15v3.98h3.63v-2.54c0-1.4.31-2.74.86-3.93H15v-3.14c-.94.01-1.84.14-2.68.38v2.23H8.44c2.39 2.42 3.75 5.63 3.75 9.09s-1.36 6.67-3.75 9.09h3.01c1.68 0 3.24-.69 4.34-1.81 1.43-1.43 2.2-3.32 2.2-5.32z" />
+      </symbol>
+
+      <!-- Símbolo de LinkedIn -->
+      <symbol id="linkedin" viewBox="0 0 16 16">
+        <path
+          d="M8 0C3.582 0 0 3.582 0 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm2.625 11h-1.75V7.417c0-1.247-.451-2.1-1.584-2.1-1.083 0-1.726.729-2.009 1.432-.103.251-.129.6-.129.952V11H3.625V5h1.625v1.297h.025c.225-.425.625-1.097 1.525-1.097 1.1 0 1.937.714 1.937 2.675V11zm4.375 0H11.5V7.625c0-1.334-.481-2.259-1.709-2.259-.78 0-1.309.416-1.525.781-.077.188-.077.461-.077.733V11H6.25s.034-7.18 0-7.625h1.75v1.084c.233-.359.65-.872 1.575-.872C11.13 2.578 12 4.547 12 7.125V11z" />
+      </symbol>
+
+      <!-- Enlace a Gmail -->
+      <a href="URL_DE_TU_CUENTA_GMAIL" target="_blank" rel="noopener noreferrer">
+        <use xlink:href="#gmail"></use>
+      </a>
+
+      <!-- Enlace a LinkedIn -->
+      <a href="URL_DE_TU_PERFIL_LINKEDIN" target="_blank" rel="noopener noreferrer">
+        <use xlink:href="#linkedin"></use>
+      </a>
+    </svg>
+
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24">
+          <use xlink:href="#bootstrap" />
+        </svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2023 Company, Inc</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item">
+        <a th:href="@{/}" class="nav-link px-2 text-muted">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link px-2 text-muted">Características</a>
+      </li>
+      <li class="nav-item">
+        <a th:href="@{/producto/lista}" class="nav-link px-2 text-muted">Precios</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link px-2 text-muted">FAQs</a>
+      </li>
+      <li class="nav-item">
+        <a th:href="@{/footer/about}" class="nav-link px-2 text-muted">Acerca</a>
+      </li>
+    </ul>
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3">
+        <a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+            <use xlink:href="#twitter" />
+          </svg></a>
+      </li>
+      <li class="ms-3">
+        <a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+            <use xlink:href="#instagram" />
+          </svg></a>
+      </li>
+      <li class="ms-3">
+        <a class="text-body-secondary" href="https://www.facebook.com/manuel.machado.796"><svg class="bi" width="24"
+            height="24">
+            <use xlink:href="#facebook" />
+          </svg></a>
+      </li>
+    </ul>
+    <div>
+      <a href="https://www.linkedin.com/in/jos%C3%A9-manuel-machado-220342169"
+        class="rounded-full flex justify-center items-center gap-x-2 py-1 px-2 md:py-2 md:px-4 text-xs md:text-base bg-white/5 hover:scale-110 hover:bg-white/10 transition"
+        target="_blank" rel="noopener noreferrer">
+        <svg class="size-4 md:size-6" width="30" height="30" xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid" viewBox="0 0 256 256">
+          <path
+            d="M218.123 218.127h-37.931v-59.403c0-14.165-.253-32.4-19.728-32.4-19.756 0-22.779 15.434-22.779 31.369v60.43h-37.93V95.967h36.413v16.694h.51a39.907 39.907 0 0 1 35.928-19.733c38.445 0 45.533 25.288 45.533 58.186l-.016 67.013ZM56.955 79.27c-12.157.002-22.014-9.852-22.016-22.009-.002-12.157 9.851-22.014 22.008-22.016 12.157-.003 22.014 9.851 22.016 22.008A22.013 22.013 0 0 1 56.955 79.27m18.966 138.858H37.95V95.967h37.97v122.16ZM237.033.018H18.89C8.58-.098.125 8.161-.001 18.471v219.053c.122 10.315 8.576 18.582 18.89 18.474h218.144c10.336.128 18.823-8.139 18.966-18.474V18.454c-.147-10.33-8.635-18.588-18.966-18.453"
+            fill="currentColor"></path>
+        </svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/machado211993"
+        class="rounded-full flex justify-center items-center gap-x-2 py-1 px-2 md:py-2 md:px-4 text-xs md:text-base bg-white/5 hover:scale-110 hover:bg-white/10 transition"
+        target="_blank" rel="noopener noreferrer">
+        <svg class="size-4 md:size-6" viewBox="0 0 256 250" width="30" height="30" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+          <path
+            d="M128.001 0C57.317 0 0 57.307 0 128.001c0 56.554 36.676 104.535 87.535 121.46 6.397 1.185 8.746-2.777 8.746-6.158 0-3.052-.12-13.135-.174-23.83-35.61 7.742-43.124-15.103-43.124-15.103-5.823-14.795-14.213-18.73-14.213-18.73-11.613-7.944.876-7.78.876-7.78 12.853.902 19.621 13.19 19.621 13.19 11.417 19.568 29.945 13.911 37.249 10.64 1.149-8.272 4.466-13.92 8.127-17.116-28.431-3.236-58.318-14.212-58.318-63.258 0-13.975 5-25.394 13.188-34.358-1.329-3.224-5.71-16.242 1.24-33.874 0 0 10.749-3.44 35.21 13.121 10.21-2.836 21.16-4.258 32.038-4.307 10.878.049 21.837 1.47 32.066 4.307 24.431-16.56 35.165-13.12 35.165-13.12 6.967 17.63 2.584 30.65 1.255 33.873 8.207 8.964 13.173 20.383 13.173 34.358 0 49.163-29.944 59.988-58.447 63.157 4.591 3.972 8.682 11.762 8.682 23.704 0 17.126-.148 30.91-.148 35.126 0 3.407 2.304 7.398 8.792 6.14C219.37 232.5 256 184.537 256 128.002 256 57.307 198.691 0 128.001 0Zm-80.06 182.34c-.282.636-1.283.827-2.194.39-.929-.417-1.45-1.284-1.15-1.922.276-.655 1.279-.838 2.205-.399.93.418 1.46 1.293 1.139 1.931Zm6.296 5.618c-.61.566-1.804.303-2.614-.591-.837-.892-.994-2.086-.375-2.66.63-.566 1.787-.301 2.626.591.838.903 1 2.088.363 2.66Zm4.32 7.188c-.785.545-2.067.034-2.86-1.104-.784-1.138-.784-2.503.017-3.05.795-.547 2.058-.055 2.861 1.075.782 1.157.782 2.522-.019 3.08Zm7.304 8.325c-.701.774-2.196.566-3.29-.49-1.119-1.032-1.43-2.496-.726-3.27.71-.776 2.213-.558 3.315.49 1.11 1.03 1.45 2.505.701 3.27Zm9.442 2.81c-.31 1.003-1.75 1.459-3.199 1.033-1.448-.439-2.395-1.613-2.103-2.626.301-1.01 1.747-1.484 3.207-1.028 1.446.436 2.396 1.602 2.095 2.622Zm10.744 1.193c.036 1.055-1.193 1.93-2.715 1.95-1.53.034-2.769-.82-2.786-1.86 0-1.065 1.202-1.932 2.733-1.958 1.522-.03 2.768.818 2.768 1.868Zm10.555-.405c.182 1.03-.875 2.088-2.387 2.37-1.485.271-2.861-.365-3.05-1.386-.184-1.056.893-2.114 2.376-2.387 1.514-.263 2.868.356 3.061 1.403Z">
+          </path>
+        </svg>
+        GitHub
+      </a>
+      <a href="mailto:manuel.machado.j.m@gmail.com"
+        class="rounded-full flex justify-center items-center gap-x-2 py-1 px-2 md:py-2 md:px-4 text-xs md:text-base bg-white/5 hover:scale-110 hover:bg-white/10 transition"
+        target="_blank" rel="noopener noreferrer">
+        <svg class="size-4 md:size-6" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M16 20h3a1 1 0 0 0 1 -1v-14a1 1 0 0 0 -1 -1h-3v16z"></path>
+          <path d="M5 20h3v-16h-3a1 1 0 0 0 -1 1v14a1 1 0 0 0 1 1z"></path>
+          <path d="M16 4l-4 4l-4 -4"></path>
+          <path d="M4 6.5l8 7.5l8 -7.5"></path>
+        </svg>
+        manuel.machado.j.m@gmail.com
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=543794862502&text=Hola%20desde%20mi%20sitio%20web" target="_blank"
+        rel="noopener noreferrer">
+        <img th:src="@{/img/whatsap.png}" alt="WhatsApp" style="width: 40px; height: 40px" />
+      </a>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
