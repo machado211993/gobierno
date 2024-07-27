@@ -1,7 +1,7 @@
 package com.egg.biblioteca.servicios;
 
 import com.egg.biblioteca.entidades.Imagen;
-import com.egg.biblioteca.entidades.Producto;
+import com.egg.biblioteca.entidades.Evento;
 import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.enumeraciones.Rol;
 import com.egg.biblioteca.excepciones.MiException;

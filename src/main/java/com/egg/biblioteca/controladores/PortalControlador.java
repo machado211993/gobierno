@@ -1,11 +1,11 @@
 package com.egg.biblioteca.controladores;
 
-import com.egg.biblioteca.entidades.Oferta;
-import com.egg.biblioteca.entidades.Producto;
+import com.egg.biblioteca.entidades.Obra;
+import com.egg.biblioteca.entidades.Evento;
 import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.excepciones.MiException;
-import com.egg.biblioteca.servicios.OfertaServicio;
-import com.egg.biblioteca.servicios.ProductoServicio;
+import com.egg.biblioteca.servicios.ObraServicio;
+import com.egg.biblioteca.servicios.EventoServicio;
 import com.egg.biblioteca.servicios.UsuarioServicio;
 import com.egg.biblioteca.util.reportes.UsuarioExporterPDF;
 import java.io.IOException;
@@ -38,9 +38,9 @@ public class PortalControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
     @Autowired
-    private ProductoServicio productoServicio;
+    private EventoServicio productoServicio;
     @Autowired
-    private OfertaServicio ofertaServicio;
+    private ObraServicio obraServicio;
 
     @GetMapping("/registrar") // registro cliente formulario
     public String registrar() {
@@ -56,7 +56,7 @@ public class PortalControlador {
             usuarioServicio.registrar(archivo, nombre, email, password, password2);
 
             modelo.put("exito", "Usuario registrado correctamente!");
-            Page<Producto> productosPage = productoServicio.listarPaginacion(page, size);
+            Page<Evento> productosPage = productoServicio.listarPaginacion(page, size);
             modelo.addAttribute("productos", productosPage.getContent());
             modelo.addAttribute("pageable", productosPage);
             return "index.html";
@@ -93,13 +93,13 @@ public class PortalControlador {
             return "redirect:/admin/dashboard";
         }
         // LISTADO PARA RECORRER LAS CARTAS EN INICIO Y CAROUSEL
-        List<Producto> productos = productoServicio.listarProductos();
-        modelo.addAttribute("productos", productos);
-        List<Oferta> ofertas = ofertaServicio.listarOfertas();
-        modelo.addAttribute("ofertas", ofertas);
-        Page<Producto> productosPage = productoServicio.listarPaginacion(page, size);
-        modelo.addAttribute("productos", productosPage.getContent());
-        modelo.addAttribute("pageable", productosPage);
+        List<Evento> eventos = productoServicio.listarEventos();
+        modelo.addAttribute("eventos", eventos);
+        List<Obra> obras = obraServicio.listarObras();
+        modelo.addAttribute("obras", obras);
+        Page<Evento> eventosPage = productoServicio.listarPaginacion(page, size);
+        modelo.addAttribute("eventos", eventosPage.getContent());
+        modelo.addAttribute("pageable", eventosPage);
 
         return "inicio.html";
     }
@@ -152,13 +152,13 @@ public class PortalControlador {
     @GetMapping("/")
     public String listar(ModelMap modelo, @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        List<Producto> productos = productoServicio.listAll(null);
-        modelo.addAttribute("productos", productos);
-        List<Oferta> ofertas = ofertaServicio.listarOfertas();
-        modelo.addAttribute("ofertas", ofertas);
+        List<Evento> eventos = productoServicio.listAll(null);
+        modelo.addAttribute("eventos", eventos);
+        List<Obra> obras = obraServicio.listarObras();
+        modelo.addAttribute("obras", obras);
         List<Usuario> usuarios = usuarioServicio.listarUsuarios();
         modelo.addAttribute("usuarios", usuarios);
-        Page<Producto> productosPage = productoServicio.listarPaginacion(page, size);
+        Page<Evento> productosPage = productoServicio.listarPaginacion(page, size);
         modelo.addAttribute("productos", productosPage.getContent());
         modelo.addAttribute("pageable", productosPage);
 

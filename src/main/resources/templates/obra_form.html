@@ -1,45 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
-  <title>Principal</title>
+  <title>Despensa La Alcancia</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<header class="header-custom text-center" style="background-color: #D2B48C; position: relative;">
-   <!-- Carrusel -->
-   <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="/img/logoloreto.jpeg" class="d-block w-50 mx-auto" alt="First slide" />
-      </div>
-      <div class="carousel-item">
-        <img src="/img/carouseloreto1.jpeg" class="d-block w-50 mx-auto" alt="Second slide" />
-      </div>
-      <div class="carousel-item">
-        <img src="/img/carouseloreto2.jpeg" class="d-block w-50 mx-auto" alt="Third slide" />
-      </div>
-      <div class="carousel-item">
-        <img src="/img/carouseloreto3.jpeg" class="d-block w-50 mx-auto" alt="fourth slide" />
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-</header>
 
 <body>
   <nav class="navbar navbar-expand-lg navBar">
     <div class="container">
       <a th:href="@{/}" class="navbar-brand d-flex align-items-center" id="navbar-logo">
-        <img th:src="@{/img/iconoloreto.jpeg}" width="100px" height="auto" alt="Img logo egg" />
+        <img th:src="@{/img/alcancia.png}" width="100px" height="auto" alt="Img logo egg" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,19 +21,32 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto">  
           <li class="nav-item" th:if="${session.usuariosession == null}">
-            <a class="nav-link" th:href="@{/acerca_de}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+            <a class="nav-link" th:href="@{/footer/about}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
               Acerca de
             </a>
           </li>
           <li class="nav-item" th:if="${session.usuariosession == null}">
-            <a class="nav-link" th:href="@{/quienes_somos}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+            <a class="nav-link" href="" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
               Quienes Somos
             </a>
           </li>
-          <li class="nav-item" th:if="${session.usuariosession == null}">
-            <a class="nav-link" th:href="@{/contactos}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
-               Contactos
+          <li class="nav-item dropdown" th:if="${session.usuariosession == null}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Contactos
             </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/producto/registrar}">Crear
+                  Contacto</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/producto/lista}">Listar Contactos</a>
+              </li>
+            </ul>
           </li>    
           <li class="nav-item dropdown" th:if="${session.usuariosession == null}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOfertas" role="button"
@@ -87,14 +73,14 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
               <li>
-                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/evento/registrar}">Crear
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/producto/registrar}">Crear
                   Evento</a>
               </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item" th:href="@{/evento/lista}">Listar Eventos</a>
+                <a class="dropdown-item" th:href="@{/producto/lista}">Listar Eventos</a>
               </li>
             </ul>
           </li>
@@ -217,56 +203,37 @@
       </div>
     </div>
   </nav>
-  <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
-    <div class="card-body">
-      <h5 class="card-title">¡Éxito!</h5>
-      <p class="card-text" th:text="${exito}"></p>
-    </div>
-  </div>
-  <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
-    <div class="card-body">
-      <h5 class="card-title">¡Error! 👎</h5>
-      <p class="card-text" th:text="${error}"></p>
-    </div>
-  </div>
+    <form class="formulario" th:action="@{/obra/registro/}" method="POST" enctype="multipart/form-data">
+      <div class="form-group my-3">
+        <label class="mb-2">Cargar Obras</label>
+        <input type="text" class="form-control" name="nombreObra" placeholder="Nombre de la Obra">
+      </div>
 
-  <section>
-    <div id="obras" class="d-flex justify-content-center align-items-center flex-wrap img-fluid"
-      style="width: 100%">
-      <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem"
-        th:each="obra : ${obras}">
-        <img th:src="@{/obra/imagen/__${obra.idObra}__}" alt="imagen-obra"
-          class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover" />
-        <div class="card-body p-0" style="background-color: #e9ecef">
-          <p class="card-text mb-0" th:text="${obra.nombreObra}" style="font-size: 20px; text-align: center"></p>
-         <!-- <h5 class="card-title mt-2 mb-0" style="font-size: 40px; text-align: center; color: black"
-            th:text="'$ ' + ${producto.precio}"></h5>-->
-        </div>
+      <div class="form-group my-3">
+        <input type="file" class="form-control" name="archivo">
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+    </form>
+    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+      <div class="card-body">
+        <h5 class="card-title">Exito!</h5>
+        <p class="card-text" th:text="${exito}"></p>
       </div>
     </div>
-  </section>
-  <!-- Controles de paginación -->
-  <div th:if="${pageable.totalPages > 1}">
-    <ul class="pagination">
-      <li th:if="${not pageable.first}" class="page-item">
-        <a class="page-link" th:href="@{/(page=0, size=${pageable.size})}">Primera</a>
-      </li>
-      <li th:if="${pageable.hasPrevious}" class="page-item">
-        <a class="page-link"
-          th:href="@{/(page=${pageable.previousPageable.pageNumber}, size=${pageable.size})}">Anterior</a>
-      </li>
-      <li th:each="pageNumber : ${#numbers.sequence(0, pageable.totalPages - 1)}" class="page-item">
-        <a class="page-link" th:href="@{/(page=${pageNumber}, size=${pageable.size})}" th:text="${pageNumber + 1}"></a>
-      </li>
-      <li th:if="${pageable.hasNext}" class="page-item">
-        <a class="page-link"
-          th:href="@{/(page=${pageable.nextPageable.pageNumber}, size=${pageable.size})}">Siguiente</a>
-      </li>
-      <li th:if="${not pageable.last}" class="page-item">
-        <a class="page-link" th:href="@{/(page=${pageable.totalPages - 1}, size=${pageable.size})}">Última</a>
-      </li>
-    </ul>
-  </div>
+    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+      <div class="card-body">
+        <h5 class="card-title">Error 👎</h5>
+        <p class="card-text" th:text="${error}"></p>
+      </div>
+    </div>
+    <section class=" text-center container">
+      <div class="row mt-3">
+        <div class="divVolver">
+          <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+        </div>
+      </div>
+    </section>
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
       <symbol id="facebook" viewBox="0 0 16 16">
@@ -396,4 +363,3 @@
     crossorigin="anonymous"></script>
 </body>
 </html>
-

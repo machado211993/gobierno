@@ -1,7 +1,7 @@
 package com.egg.biblioteca.util.reportes;
 
 import com.egg.biblioteca.entidades.Obra;
-import com.egg.biblioteca.entidades.Usuario;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
@@ -13,20 +13,21 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import java.awt.Color;
 import java.io.IOException;
+
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
-public class UsuarioExporterPDF {
+public class ObraExporterPDF {
 
-    private final List<Usuario> listarUsuarios;
+    private final List<Obra> listarObras;
 
-    public UsuarioExporterPDF(List<Usuario> listarUsuarios) { //inicializa el listado
+    public ObraExporterPDF(List<Obra> listarObras) { // inicializa el listado
         super();
-        this.listarUsuarios = listarUsuarios;
+        this.listarObras = listarObras;
 
     }
 
-    private void escribirCabeceraDeLaTabla(PdfPTable tabla) { //crea las cabeceras de la tabla
+    private void escribirCabeceraDeLaTabla(PdfPTable tabla) { // crea las cabeceras de la tabla
         PdfPCell celda = new PdfPCell();
         celda.setBackgroundColor(Color.RED);
         celda.setPadding(5);
@@ -36,21 +37,20 @@ public class UsuarioExporterPDF {
 
         celda.setPhrase(new Phrase("NOMBRE", fuente));
         tabla.addCell(celda);
-        celda.setPhrase(new Phrase("EMAIL", fuente));
+        celda.setPhrase(new Phrase("PRECIO", fuente));
         tabla.addCell(celda);
 
-        celda.setPhrase(new Phrase("IMAGEN", fuente));
+        celda.setPhrase(new Phrase("ALTA OFERTA", fuente));
         tabla.addCell(celda);
 
     }
 
-    private void escribirDatosDeLaTabla(PdfPTable tabla) { //trae los datos de la base de datos 
-        for (Usuario usuario : listarUsuarios) {
+    private void escribirDatosDeLaTabla(PdfPTable tabla) { // trae los datos de la base de datos
+        for (Obra obra : listarObras) {
 
-            tabla.addCell(usuario.getNombre());
-            tabla.addCell(usuario.getEmail());
+            tabla.addCell(obra.getNombreObra());
 
-            tabla.addCell(String.valueOf(usuario.getImagen().getContenido()));
+            tabla.addCell(String.valueOf(obra.getAltaObra()));
 
         }
     }
@@ -64,22 +64,23 @@ public class UsuarioExporterPDF {
             fuente.setColor(Color.BLUE);
             fuente.setSize(18);
 
-            Paragraph titulo = new Paragraph("Lista de Usuarios", fuente);
+            Paragraph titulo = new Paragraph("Lista de Ofertas", fuente);
             titulo.setAlignment(Paragraph.ALIGN_CENTER);
             documento.add(titulo);
 
-            //FORMATO DE LA TABLA 
-            PdfPTable tabla = new PdfPTable(3); //3 COLUMNAS
+            // FORMATO DE LA TABLA
+            PdfPTable tabla = new PdfPTable(3); // 3 COLUMNAS
             tabla.setWidthPercentage(100);
             tabla.setSpacingBefore(15);
-            tabla.setWidths(new float[]{4f, 2.3f, 2.3f});
+            tabla.setWidths(new float[] { 4f, 2.3f, 2.3f });
             tabla.setWidthPercentage(110);
 
-            //llamar los metodos
+            // llamar los metodos
             escribirCabeceraDeLaTabla(tabla);
             escribirDatosDeLaTabla(tabla);
             documento.add(tabla);
         }
 
     }
+
 }

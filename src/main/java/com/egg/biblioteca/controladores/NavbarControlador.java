@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class NavbarControlador {
-    @GetMapping("/acerca")
+    @GetMapping("/acerca_de")
     public String acerca() {
         return "acerca_de.html";
     }
@@ -18,9 +18,9 @@ public class NavbarControlador {
 
     }
 
-    @GetMapping("/avisos")
+    @GetMapping("/avisos_importantes")
     public String avisosImportantes() {
-        return "avisos.html";
+        return "avisos_importantes.html";
     }
 
     @GetMapping("/quienes_somos")

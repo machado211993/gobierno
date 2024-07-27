@@ -1,10 +1,10 @@
 package com.egg.biblioteca.controladores;
 
-import com.egg.biblioteca.entidades.Oferta;
-import com.egg.biblioteca.entidades.Producto;
+import com.egg.biblioteca.entidades.Obra;
+import com.egg.biblioteca.entidades.Evento;
 import com.egg.biblioteca.entidades.Usuario;
-import com.egg.biblioteca.servicios.OfertaServicio;
-import com.egg.biblioteca.servicios.ProductoServicio;
+import com.egg.biblioteca.servicios.ObraServicio;
+import com.egg.biblioteca.servicios.EventoServicio;
 import com.egg.biblioteca.servicios.UsuarioServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +27,19 @@ public class AdminControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
     @Autowired
-    private ProductoServicio productoServicio;
+    private EventoServicio eventoServicio;
     @Autowired
-    private OfertaServicio ofertaServicio;
+    private ObraServicio obraServicio;
 
     @GetMapping("/dashboard")
     public String panelAdministrativo(ModelMap modelo, @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        List<Producto> productos = productoServicio.listarProductos();
-        modelo.addAttribute("productos", productos);
-        List<Oferta> ofertas = ofertaServicio.listarOfertas();
-        modelo.addAttribute("ofertas", ofertas);
-        Page<Producto> productosPage = productoServicio.listarPaginacion(page, size);
-        modelo.addAttribute("productos", productosPage.getContent());
+        List<Evento> eventos = eventoServicio.listarEventos();
+        modelo.addAttribute("eventos", eventos);
+        List<Obra> obras = obraServicio.listarObras();
+        modelo.addAttribute("obras", obras);
+        Page<Evento> productosPage = eventoServicio.listarPaginacion(page, size);
+        modelo.addAttribute("eventos", productosPage.getContent());
         modelo.addAttribute("pageable", productosPage);
         return "panel.html";
     }
@@ -59,10 +59,10 @@ public class AdminControlador {
         return "redirect:/admin/usuarios";
     }
 
-    @GetMapping("/dashboard/{idProducto}")
-    public ResponseEntity<byte[]> imagenProducto(@PathVariable String idProducto) {
+    @GetMapping("/dashboard/{idEvento}")
+    public ResponseEntity<byte[]> imagenProducto(@PathVariable String idEvento) {
 
-        Producto producto = productoServicio.getOne(idProducto);
+        Evento producto = eventoServicio.getOne(idEvento);
 
         byte[] imagen = producto.getImagen().getContenido();
 
@@ -74,12 +74,12 @@ public class AdminControlador {
     }
 
     
-    @GetMapping("/dashboard/{idOferta}")
-    public ResponseEntity<byte[]> imagenOferta(@PathVariable String idOferta) {
+    @GetMapping("/dashboard/{idObra}")
+    public ResponseEntity<byte[]> imagenOferta(@PathVariable String idObra) {
 
-        Oferta oferta = ofertaServicio.getOne(idOferta);
+        Obra obra = obraServicio.getOne(idObra);
 
-        byte[] imagen = oferta.getImagen().getContenido();
+        byte[] imagen = obra.getImagen().getContenido();
 
         HttpHeaders headers = new HttpHeaders();
 
