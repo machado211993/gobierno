@@ -1,9 +1,13 @@
 package com.egg.biblioteca.controladores;
 
+import com.egg.biblioteca.entidades.Acto;
 import com.egg.biblioteca.entidades.Evento;
+import com.egg.biblioteca.entidades.Obra;
 import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.repositorios.EventoRepositorio;
+import com.egg.biblioteca.servicios.ActoServicio;
 import com.egg.biblioteca.servicios.EventoServicio;
+import com.egg.biblioteca.servicios.ObraServicio;
 import com.egg.biblioteca.util.reportes.EventoExporterPDF;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -30,9 +34,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/evento")
 public class EventoControlador {
-
+    @Autowired
+    private ObraServicio obraServicio;
     @Autowired
     private EventoServicio eventoServicio;
+    @Autowired
+    private ActoServicio actoServicio;
 
     @GetMapping("/registrar") // localhost:8080/producto/registrar
     public String registrar(ModelMap modelo) {
@@ -44,20 +51,23 @@ public class EventoControlador {
             @RequestParam(required = false) MultipartFile archivo, @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         try {
-
             eventoServicio.crearEvento(archivo, nombreEvento, nombreEvento);
-
-            modelo.put("exito", "El evento fue cargado correctamente!");
-            Page<Evento> productosPage = eventoServicio.listarPaginacion(page, size);
-            modelo.addAttribute("eventos", productosPage.getContent());
-            modelo.addAttribute("pageable", productosPage);
+            ;
+            modelo.put("exito", "el evento fue cargada correctamente");
+            List<Obra> obras = obraServicio.listarObras();
+            modelo.addAttribute("obras", obras);
+            List<Acto> actos = actoServicio.listarActos();
+            modelo.addAttribute("actos", actos);
+            List<Evento> eventos = eventoServicio.listarEventos();
+            modelo.addAttribute("eventos", eventos);
+            return "index";
 
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
 
             return "evento_form.html"; // volvemos a cargar el formulario. ///evento form
         }
-        return "index.html";
+
     }
 
     // paginacion

@@ -1,7 +1,11 @@
 package com.egg.biblioteca.controladores;
 
+import com.egg.biblioteca.entidades.Acto;
+import com.egg.biblioteca.entidades.Evento;
 import com.egg.biblioteca.entidades.Obra;
 import com.egg.biblioteca.excepciones.MiException;
+import com.egg.biblioteca.servicios.ActoServicio;
+import com.egg.biblioteca.servicios.EventoServicio;
 import com.egg.biblioteca.servicios.ObraServicio;
 import com.egg.biblioteca.util.reportes.ObraExporterPDF;
 import java.io.IOException;
@@ -31,6 +35,10 @@ public class ObraControlador {
 
     @Autowired
     private ObraServicio obraServicio;
+    @Autowired
+    private EventoServicio eventoServicio;
+    @Autowired
+    private ActoServicio actoServicio;
 
     @GetMapping("/registrar")
     public String registrar(ModelMap modelo) { // metodo registro formulario
@@ -41,15 +49,20 @@ public class ObraControlador {
     @PostMapping("/registro") // metodo registrado
     public String registro(@RequestParam(required = false) String nombreObra,
             @RequestParam MultipartFile archivo, ModelMap modelo) {
-        try {
+        try { // consultar si hay que mandar precargado
             obraServicio.crearObra(archivo, nombreObra);
             modelo.put("exito", "la obra fue cargada correctamente");
-
+            List<Obra> obras = obraServicio.listarObras();
+            modelo.addAttribute("obras", obras);
+            List<Acto> actos = actoServicio.listarActos();
+            modelo.addAttribute("actos", actos);
+            List<Evento> eventos = eventoServicio.listarEventos();
+            modelo.addAttribute("eventos", eventos);
+            return "index";
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
             return "obra_form";
         }
-        return "index";
 
     }
 

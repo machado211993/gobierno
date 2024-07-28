@@ -47,6 +47,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto">  
+          <!--usuario no logueados-->
           <li class="nav-item" th:if="${session.usuariosession == null}">
             <a class="nav-link" th:href="@{/acerca_de}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
               Acerca de
@@ -105,70 +106,108 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
               <li>
-                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/producto/registrar}">Crear
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/acto/registrar}">Crear
                   Actos</a>
               </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item" th:href="@{/producto/lista}">Listar Actos</a>
+                <a class="dropdown-item" th:href="@{/acto/lista}">Listar Actos</a>
               </li>
             </ul>
           </li>
-          <li class="nav-item dropdown" th:if="${session.usuariosession == null}">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Avisos Importantes
+          <li class="nav-item" th:if="${session.usuariosession == null}">
+            <a class="nav-link" th:href="@{/avisos_importantes}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+               Avisos importantes
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
-              <li>
-                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/producto/registrar}">Crear
-                  aviso importante</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a class="dropdown-item" th:href="@{/producto/lista}">Listar avisos importantes</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
-            <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ADMIN')" href="#" id="navbarDropdownProveedores"
-              role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Horario
+          </li>  
+          <li class="nav-item" th:if="${session.usuariosession == null}">
+            <a class="nav-link" href="/registrar" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+              Registrate
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProveedores">
-              <li>
-                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/proveedor/registrar}">Crear
-                  Horario</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a class="dropdown-item" th:href="@{/proveedor/lista}">Listar Horario</a>
-              </li>
-            </ul>
           </li>
-          <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
-            <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ADMIN')" href="#" id="navbarDropdownRubros"
-              role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Lugar
+          <li class="nav-item" th:if="${session.usuariosession == null}">
+            <a class="nav-link" href="/login" id="navbarDropdownLogin" role="button" aria-expanded="false">
+              Login
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownRubros">
-              <li>
-                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/rubro/registrar}">Crear Lugar</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a class="dropdown-item" th:href="@{/rubro/lista}">Listar Lugar</a>
-              </li>
-            </ul>
           </li>
+
+         <!--usuarios logueados-->
+         <li class="nav-item" th:if="${session.usuariosession != null}">
+          <a class="nav-link" th:href="@{/acerca_de}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+            Acerca de
+          </a>
+        </li>
+        <li class="nav-item" th:if="${session.usuariosession != null}">
+          <a class="nav-link" th:href="@{/quienes_somos}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+            Quienes Somos
+          </a>
+        </li>
+        <li class="nav-item" th:if="${session.usuariosession != null}">
+          <a class="nav-link" th:href="@{/contactos}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+             Contactos
+          </a>
+        </li>    
+        <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOfertas" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Obras
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownOfertas">
+            <li>
+              <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/obra/registrar}">Crear
+                Obras</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item" th:href="@{/obra/lista}">Listar Obras</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Eventos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+            <li>
+              <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/evento/registrar}">Crear
+                Evento</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item" th:href="@{/evento/lista}">Listar Eventos</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Actos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+            <li>
+              <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/acto/registrar}">Crear
+                Actos</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item" th:href="@{/acto/lista}">Listar Actos</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" th:if="${session.usuariosession != null}">
+          <a class="nav-link" th:href="@{/avisos_importantes}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+             Avisos importantes
+          </a>
+        </li> 
           <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
             <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ADMIN')" href="#" id="navbarDropdownClientes"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -182,7 +221,7 @@
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item" th:href="@{/listarUsuarios}">Listar Clientes</a>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/listarUsuarios}">Listar Clientes</a>
               </li>
             </ul>
           </li>
@@ -203,16 +242,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item" th:if="${session.usuariosession == null}">
-            <a class="nav-link" href="/registrar" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
-              Registrate
-            </a>
-          </li>
-          <li class="nav-item" th:if="${session.usuariosession == null}">
-            <a class="nav-link" href="/login" id="navbarDropdownLogin" role="button" aria-expanded="false">
-              Login
-            </a>
-          </li>
+        
         </ul>
       </div>
     </div>
@@ -230,43 +260,49 @@
     </div>
   </div>
 
-  <section>
-    <div id="obras" class="d-flex justify-content-center align-items-center flex-wrap img-fluid"
-      style="width: 100%">
-      <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem"
-        th:each="obra : ${obras}">
-        <img th:src="@{/obra/imagen/__${obra.idObra}__}" alt="imagen-obra"
-          class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover" />
-        <div class="card-body p-0" style="background-color: #e9ecef">
-          <p class="card-text mb-0" th:text="${obra.nombreObra}" style="font-size: 20px; text-align: center"></p>
-         <!-- <h5 class="card-title mt-2 mb-0" style="font-size: 40px; text-align: center; color: black"
-            th:text="'$ ' + ${producto.precio}"></h5>-->
+  <section class="mb-5 border border-3 border-primary p-4">
+    <h2 class="text-center mb-4">
+        <span class="section-title">Obras</span>
+    </h2>
+    <div id="obras" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
+        <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem;" th:each="obra : ${obras}">
+            <img th:src="@{/obra/imagen/__${obra.idObra}__}" alt="Imagen de la obra" class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;">
+            <div class="card-body p-0">
+                <p class="card-text mb-0" th:text="${obra.nombreObra}" style="font-size: 16px; text-align: center; font-weight: normal;"></p>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  <!-- Controles de paginación -->
-  <div th:if="${pageable.totalPages > 1}">
-    <ul class="pagination">
-      <li th:if="${not pageable.first}" class="page-item">
-        <a class="page-link" th:href="@{/(page=0, size=${pageable.size})}">Primera</a>
-      </li>
-      <li th:if="${pageable.hasPrevious}" class="page-item">
-        <a class="page-link"
-          th:href="@{/(page=${pageable.previousPageable.pageNumber}, size=${pageable.size})}">Anterior</a>
-      </li>
-      <li th:each="pageNumber : ${#numbers.sequence(0, pageable.totalPages - 1)}" class="page-item">
-        <a class="page-link" th:href="@{/(page=${pageNumber}, size=${pageable.size})}" th:text="${pageNumber + 1}"></a>
-      </li>
-      <li th:if="${pageable.hasNext}" class="page-item">
-        <a class="page-link"
-          th:href="@{/(page=${pageable.nextPageable.pageNumber}, size=${pageable.size})}">Siguiente</a>
-      </li>
-      <li th:if="${not pageable.last}" class="page-item">
-        <a class="page-link" th:href="@{/(page=${pageable.totalPages - 1}, size=${pageable.size})}">Última</a>
-      </li>
-    </ul>
-  </div>
+</section>
+
+<section class="mb-5 border border-3 border-primary p-4">
+    <h2 class="text-center mb-4">
+        <span class="section-title">Eventos</span>
+    </h2>
+    <div id="eventos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
+        <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem;" th:each="evento : ${eventos}">
+            <img th:src="@{/evento/imagen/__${evento.idEvento}__}" alt="Imagen del evento" class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;">
+            <div class="card-body p-0">
+                <p class="card-text mb-0" th:text="${evento.nombreEvento}" style="font-size: 16px; text-align: center; font-weight: normal;"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5 border border-3 border-primary p-4">
+    <h2 class="text-center mb-4">
+        <span class="section-title">Actos</span>
+    </h2>
+    <div id="actos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
+        <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem;" th:each="acto : ${actos}">
+            <img th:src="@{/acto/imagen/__${acto.idActo}__}" alt="Imagen del acto" class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;">
+            <div class="card-body p-0">
+                <p class="card-text mb-0" th:text="${acto.nombreActo}" style="font-size: 16px; text-align: center; font-weight: normal;"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
       <symbol id="facebook" viewBox="0 0 16 16">

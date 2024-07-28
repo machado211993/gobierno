@@ -37,8 +37,6 @@ public class ObraExporterPDF {
 
         celda.setPhrase(new Phrase("NOMBRE", fuente));
         tabla.addCell(celda);
-        celda.setPhrase(new Phrase("PRECIO", fuente));
-        tabla.addCell(celda);
 
         celda.setPhrase(new Phrase("ALTA OFERTA", fuente));
         tabla.addCell(celda);

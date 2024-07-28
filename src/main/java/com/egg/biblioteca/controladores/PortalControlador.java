@@ -1,11 +1,13 @@
 package com.egg.biblioteca.controladores;
 
-import com.egg.biblioteca.entidades.Obra;
+import com.egg.biblioteca.entidades.Acto;
 import com.egg.biblioteca.entidades.Evento;
+import com.egg.biblioteca.entidades.Obra;
 import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.excepciones.MiException;
-import com.egg.biblioteca.servicios.ObraServicio;
+import com.egg.biblioteca.servicios.ActoServicio;
 import com.egg.biblioteca.servicios.EventoServicio;
+import com.egg.biblioteca.servicios.ObraServicio;
 import com.egg.biblioteca.servicios.UsuarioServicio;
 import com.egg.biblioteca.util.reportes.UsuarioExporterPDF;
 import java.io.IOException;
@@ -16,7 +18,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -38,9 +39,11 @@ public class PortalControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
     @Autowired
-    private EventoServicio productoServicio;
+    private EventoServicio eventoServicio;
     @Autowired
     private ObraServicio obraServicio;
+    @Autowired
+    private ActoServicio actoServicio;
 
     @GetMapping("/registrar") // registro cliente formulario
     public String registrar() {
@@ -49,16 +52,12 @@ public class PortalControlador {
 
     @PostMapping("/registro") // cliente registrado
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
-            String password2, ModelMap modelo, MultipartFile archivo, @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            String password2, ModelMap modelo, MultipartFile archivo) {
 
         try {
             usuarioServicio.registrar(archivo, nombre, email, password, password2);
 
             modelo.put("exito", "Usuario registrado correctamente!");
-            Page<Evento> productosPage = productoServicio.listarPaginacion(page, size);
-            modelo.addAttribute("productos", productosPage.getContent());
-            modelo.addAttribute("pageable", productosPage);
             return "index.html";
         } catch (MiException ex) {
 
@@ -84,8 +83,7 @@ public class PortalControlador {
     // inicio
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(HttpSession session, ModelMap modelo, @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+    public String inicio(HttpSession session, ModelMap modelo) {
 
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
@@ -93,13 +91,12 @@ public class PortalControlador {
             return "redirect:/admin/dashboard";
         }
         // LISTADO PARA RECORRER LAS CARTAS EN INICIO Y CAROUSEL
-        List<Evento> eventos = productoServicio.listarEventos();
-        modelo.addAttribute("eventos", eventos);
         List<Obra> obras = obraServicio.listarObras();
         modelo.addAttribute("obras", obras);
-        Page<Evento> eventosPage = productoServicio.listarPaginacion(page, size);
-        modelo.addAttribute("eventos", eventosPage.getContent());
-        modelo.addAttribute("pageable", eventosPage);
+        List<Acto> actos = actoServicio.listarActos();
+        modelo.addAttribute("actos", actos);
+        List<Evento> eventos = eventoServicio.listarEventos();
+        modelo.addAttribute("eventos", eventos);
 
         return "inicio.html";
     }
@@ -150,17 +147,16 @@ public class PortalControlador {
     // funcionalidad para devolver productoServicio lista y ofertaServicio lista y
     // usuarioServicio lista EN INDEX
     @GetMapping("/")
-    public String listar(ModelMap modelo, @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        List<Evento> eventos = productoServicio.listAll(null);
-        modelo.addAttribute("eventos", eventos);
-        List<Obra> obras = obraServicio.listarObras();
-        modelo.addAttribute("obras", obras);
+    public String listar(ModelMap modelo) {
+       
         List<Usuario> usuarios = usuarioServicio.listarUsuarios();
         modelo.addAttribute("usuarios", usuarios);
-        Page<Evento> productosPage = productoServicio.listarPaginacion(page, size);
-        modelo.addAttribute("productos", productosPage.getContent());
-        modelo.addAttribute("pageable", productosPage);
+        List<Obra> obras = obraServicio.listarObras();
+        modelo.addAttribute("obras", obras);
+        List<Acto> actos = actoServicio.listarActos();
+        modelo.addAttribute("actos", actos);
+        List<Evento> eventos = eventoServicio.listarEventos();
+        modelo.addAttribute("eventos", eventos);
 
         return "index";
 
