@@ -116,11 +116,24 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item" th:if="${session.usuariosession == null}">
-            <a class="nav-link" th:href="@{/avisos_importantes}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
-               Avisos importantes
+          <li class="nav-item dropdown" th:if="${session.usuariosession == null}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Avisos importantes
             </a>
-          </li>  
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+              <li>
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/aviso/registrar}">Crear
+                  Avisos</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" th:href="@{/aviso/lista}">Listar Avisos</a>
+              </li>
+            </ul>
+          </li> 
           <li class="nav-item" th:if="${session.usuariosession == null}">
             <a class="nav-link" href="/registrar" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
               Registrate
@@ -202,10 +215,23 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" th:if="${session.usuariosession != null}">
-          <a class="nav-link" th:href="@{/avisos_importantes}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
-             Avisos importantes
+        <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Avisos importantes
           </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
+            <li>
+              <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/aviso/registrar}">Crear
+                Avisos</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item" th:href="@{/aviso/lista}">Listar Avisos</a>
+            </li>
+          </ul>
         </li> 
           <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
             <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ADMIN')" href="#" id="navbarDropdownClientes"

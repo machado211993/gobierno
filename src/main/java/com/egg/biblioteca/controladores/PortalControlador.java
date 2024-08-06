@@ -3,9 +3,11 @@ package com.egg.biblioteca.controladores;
 import com.egg.biblioteca.entidades.Acto;
 import com.egg.biblioteca.entidades.Evento;
 import com.egg.biblioteca.entidades.Obra;
+import com.egg.biblioteca.entidades.Aviso;
 import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.servicios.ActoServicio;
+import com.egg.biblioteca.servicios.AvisoServicio;
 import com.egg.biblioteca.servicios.EventoServicio;
 import com.egg.biblioteca.servicios.ObraServicio;
 import com.egg.biblioteca.servicios.UsuarioServicio;
@@ -44,6 +46,8 @@ public class PortalControlador {
     private ObraServicio obraServicio;
     @Autowired
     private ActoServicio actoServicio;
+    @Autowired
+    private AvisoServicio avisoServicio;
 
     @GetMapping("/registrar") // registro cliente formulario
     public String registrar() {
@@ -97,6 +101,8 @@ public class PortalControlador {
         modelo.addAttribute("actos", actos);
         List<Evento> eventos = eventoServicio.listarEventos();
         modelo.addAttribute("eventos", eventos);
+        List<Aviso> avisos = avisoServicio.listarAvisos();
+        modelo.addAttribute("avisos", avisos);
 
         return "inicio.html";
     }
@@ -157,6 +163,8 @@ public class PortalControlador {
         modelo.addAttribute("actos", actos);
         List<Evento> eventos = eventoServicio.listarEventos();
         modelo.addAttribute("eventos", eventos);
+        List<Aviso> avisos = avisoServicio.listarAvisos();
+        modelo.addAttribute("avisos", avisos);
 
         return "index";
 
