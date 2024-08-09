@@ -1,10 +1,13 @@
+C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\controladores\AvisoControlador.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\controladores\PortalControlador.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\repositorios\EventoRepositorio.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\repositorios\UsuarioRepositorio.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\controladores\ActoControlador.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\entidades\Imagen.java
+C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\entidades\Aviso.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\controladores\NavbarControlador.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\servicios\UsuarioServicio.java
+C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\util\reportes\AvisoExporterPDF.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\entidades\Evento.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\controladores\ImagenControlador.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\repositorios\ActoRepositorio.java
@@ -16,8 +19,10 @@ C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\bibliot
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\util\reportes\UsuarioExporterPDF.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\controladores\ObraControladorRest.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\controladores\ObraControlador.java
+C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\servicios\AvisoServicio.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\util\reportes\ActoExporterPDF.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\controladores\Controlador.java
+C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\repositorios\AvisoRepositorio.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\entidades\Obra.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\servicios\ObraServicio.java
 C:\Users\manue\Documents\NetBeansProjects\Gobierno\src\main\java\com\egg\biblioteca\BibliotecaApplication.java
