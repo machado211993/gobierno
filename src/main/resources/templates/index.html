@@ -292,7 +292,7 @@
     </h2>
     <div id="obras" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
         <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem;" th:each="obra : ${obras}">
-            <img th:src="@{/obra/imagen/__${obra.idObra}__}" alt="Imagen de la obra" class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;">
+            <img th:src="@{/obra/imagen/__${obra.idObra}__}" alt="Imagen de la obra" class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImageModal(this.src)">
             <div class="card-body p-0">
                 <p class="card-text mb-0" th:text="${obra.nombreObra}" style="font-size: 16px; text-align: center; font-weight: normal;"></p>
             </div>
@@ -301,32 +301,50 @@
 </section>
 
 <section class="mb-5 border border-3 border-primary p-4">
-    <h2 class="text-center mb-4">
-        <span class="section-title">Eventos</span>
-    </h2>
-    <div id="eventos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
-        <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem;" th:each="evento : ${eventos}">
-            <img th:src="@{/evento/imagen/__${evento.idEvento}__}" alt="Imagen del evento" class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;">
-            <div class="card-body p-0">
-                <p class="card-text mb-0" th:text="${evento.nombreEvento}" style="font-size: 16px; text-align: center; font-weight: normal;"></p>
-            </div>
-        </div>
-    </div>
+  <h2 class="text-center mb-4">
+      <span class="section-title">Eventos</span>
+  </h2>
+  <div id="eventos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
+      <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem;" th:each="evento : ${eventos}">
+          <img 
+              th:src="@{/evento/imagen/__${evento.idEvento}__}" 
+              alt="Imagen del evento" 
+              class="card-img-top img-fluid mx-auto" 
+              style="height: 200px; object-fit: cover;" 
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal" 
+              onclick="showImageModal(this.src)"
+          >
+          <div class="card-body p-0">
+              <p class="card-text mb-0" th:text="${evento.nombreEvento}" style="font-size: 16px; text-align: center; font-weight: normal;"></p>
+          </div>
+      </div>
+  </div>
 </section>
 
+
 <section class="mb-5 border border-3 border-primary p-4">
-    <h2 class="text-center mb-4">
-        <span class="section-title">Actos</span>
-    </h2>
-    <div id="actos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
-        <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem;" th:each="acto : ${actos}">
-            <img th:src="@{/acto/imagen/__${acto.idActo}__}" alt="Imagen del acto" class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;">
-            <div class="card-body p-0">
-                <p class="card-text mb-0" th:text="${acto.nombreActo}" style="font-size: 16px; text-align: center; font-weight: normal;"></p>
-            </div>
-        </div>
-    </div>
+  <h2 class="text-center mb-4">
+      <span class="section-title">Actos</span>
+  </h2>
+  <div id="actos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
+      <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem;" th:each="acto : ${actos}">
+          <img 
+              th:src="@{/acto/imagen/__${acto.idActo}__}" 
+              alt="Imagen del acto" 
+              class="card-img-top img-fluid mx-auto" 
+              style="height: 200px; object-fit: cover;" 
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal" 
+              onclick="showImageModal(this.src)"
+          >
+          <div class="card-body p-0">
+              <p class="card-text mb-0" th:text="${acto.nombreActo}" style="font-size: 16px; text-align: center; font-weight: normal;"></p>
+          </div>
+      </div>
+  </div>
 </section>
+
 
 <section class="mb-5 border border-3 border-primary p-4">
   <h2 class="text-center mb-4">
@@ -334,13 +352,37 @@
   </h2>
   <div id="avisos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
       <div class="card m-2 shadow" style="background-color: #e9ecef; border: none; width: 18rem;" th:each="aviso : ${avisos}">
-          <img th:src="@{/aviso/imagen/__${aviso.idAviso}__}" alt="Imagen del aviso" class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;">
+          <img 
+              th:src="@{/aviso/imagen/__${aviso.idAviso}__}" 
+              alt="Imagen del aviso" 
+              class="card-img-top img-fluid mx-auto" 
+              style="height: 200px; object-fit: cover;" 
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal" 
+              onclick="showImageModal(this.src)"
+          >
           <div class="card-body p-0">
               <p class="card-text mb-0" th:text="${aviso.nombreAviso}" style="font-size: 16px; text-align: center; font-weight: normal;"></p>
           </div>
       </div>
   </div>
 </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="imageModalLabel">Imagen Ampliada</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <img id="modalImage" src="" alt="Imagen Ampliada" style="width: 100%; height: auto;">
+          </div>
+      </div>
+  </div>
+</div>
 
 
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -470,6 +512,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+
+    <script>
+      function showImageModal(src) {
+          document.getElementById('modalImage').src = src;
+      }
+  </script>
 </body>
 </html>
 
