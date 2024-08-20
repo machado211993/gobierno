@@ -31,6 +31,11 @@
           <ul class="navbar-nav ms-auto">  
             <!--usuario no logueados-->
             <li class="nav-item" th:if="${session.usuariosession == null}">
+              <a class="nav-link" th:href="@{/gestiones}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+                Gestiones
+              </a>
+            </li>
+            <li class="nav-item" th:if="${session.usuariosession == null}">
               <a class="nav-link" th:href="@{/acerca_de}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
                 Acerca de
               </a>
@@ -129,6 +134,11 @@
             </li>
 
           <!--usuarios logueados-->
+          <li class="nav-item" th:if="${session.usuariosession != null}">
+            <a class="nav-link" th:href="@{/gestiones}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+              Gestiones
+            </a>
+          </li>
           <li class="nav-item" th:if="${session.usuariosession != null}">
             <a class="nav-link" th:href="@{/acerca_de}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
               Acerca de
@@ -255,8 +265,10 @@
         </div>
       </div>
     </nav>
-    
+      <!--<h3 th:text="${mensaje}">Mensaje por defecto</h3>-->
       <div class="container mt-5">
+
+
           <h1 class="mb-4">Loreto (Corrientes)</h1>
           
           <section class="content-section mb-5">

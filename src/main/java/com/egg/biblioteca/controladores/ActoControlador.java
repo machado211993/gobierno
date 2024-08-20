@@ -43,7 +43,6 @@ public class ActoControlador {
     @GetMapping("/registrar")
     public String registrar(ModelMap modelo) { // metodo registro formulario
         return "acto_form";
-
     }
 
     @PostMapping("/registro") // metodo registrado
@@ -51,7 +50,7 @@ public class ActoControlador {
             @RequestParam MultipartFile archivo, ModelMap modelo) {
         try {
             actoServicio.crearActo(archivo, nombreActo);
-
+            
             modelo.put("exito", "el evento fue cargada correctamente");
             List<Obra> obras = obraServicio.listarObras();
             modelo.addAttribute("obras", obras);

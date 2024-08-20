@@ -1,14 +1,18 @@
 package com.egg.biblioteca.controladores;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
 
 @Controller
 @RequestMapping("/")
 public class NavbarControlador {
     @GetMapping("/acerca_de")
-    public String acerca() {
+    public String acerca(ModelMap modelo) {
+        /*modelo.addAttribute("mensaje", "Acerca de");*/
         return "acerca_de.html";
     }
 
@@ -27,5 +31,9 @@ public class NavbarControlador {
     public String quienesSomos() {
         return "quienes_somos.html";
     }
-
+   @GetMapping("/gestiones")
+   public String getiones() {
+       return "gestiones.html";
+   }
+   
 }

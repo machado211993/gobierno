@@ -48,6 +48,11 @@
         <ul class="navbar-nav ms-auto">  
           <!--usuario no logueados-->
           <li class="nav-item" th:if="${session.usuariosession == null}">
+            <a class="nav-link" th:href="@{/gestiones}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+              Gestiones
+            </a>
+          </li>
+          <li class="nav-item" th:if="${session.usuariosession == null}">
             <a class="nav-link" th:href="@{/acerca_de}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
               Acerca de
             </a>
@@ -146,6 +151,11 @@
           </li>
 
         <!--usuarios logueados-->
+        <li class="nav-item" th:if="${session.usuariosession != null}">
+          <a class="nav-link" th:href="@{/gestiones}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
+            Gestiones
+          </a>
+        </li>
         <li class="nav-item" th:if="${session.usuariosession != null}">
           <a class="nav-link" th:href="@{/acerca_de}" id="navbarDropdownRegistrate" role="button" aria-expanded="false">
             Acerca de
