@@ -87,10 +87,11 @@ public class ObraControlador {
     @GetMapping("/modificar/{idObra}")
     public String modificar(@PathVariable String idObra, ModelMap modelo) {
 
-        modelo.put("obras", obraServicio.getOne(idObra));
+        modelo.put("obra", obraServicio.getOne(idObra));
 
         return "obra_modificar.html";
     }
+
 
     @PostMapping("/modificar/{idObra}")
     public String modificar(@PathVariable String idObra, String nombreObra, MultipartFile archivo,

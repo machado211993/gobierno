@@ -82,7 +82,7 @@ public class ObraServicio {
     }
 
     public Obra getOne(String idObra) {
-        return obraRepositorio.getOne(idObra); // conseguir uno
+        return obraRepositorio.getOne(idObra); //conseguir uno
     }
 
     @Transactional

@@ -26,9 +26,9 @@ public class EventoServicio {
     private ImagenServicio imagenServicio;
 
     @Transactional
-    public void crearEvento(MultipartFile archivo, String idEvento, String nombreEvento) throws MiException {
+    public void crearEvento(MultipartFile archivo, String nombreEvento) throws MiException {
 
-        validar(archivo, idEvento, nombreEvento);
+        validar(archivo, nombreEvento, nombreEvento);
 
         Evento evento = new Evento();
         evento.setNombreEvento(nombreEvento);
@@ -105,18 +105,26 @@ public class EventoServicio {
 
     private void validar(MultipartFile archivo, String idEvento, String nombreEvento) throws MiException {
 
-        if (idEvento == null) {
-            throw new MiException("el idEvento no puede ser nulo"); //
+        
+
+        if (archivo == null) {
+            throw new MiException("el archivo no puede ser nulo"); //
+        }
+        if (archivo.isEmpty() || archivo == null) {
+            throw new MiException("el archivo no puede ser nulo o estar vacio");
         }
 
+        if (nombreEvento == null) {
+            throw new MiException("el nombre del evento no puede ser nulo"); //
+        }
         if (nombreEvento.isEmpty() || nombreEvento == null) {
             throw new MiException("el nombre del evento no puede ser nulo o estar vacio");
+
         }
 
-        if (archivo.isEmpty() || archivo == null) {
-            throw new MiException("El archivo no puede ser nula o estar vacia");
+        if (idEvento.isEmpty() || idEvento == null) {
+            throw new MiException("el id no puede ser nulo o estar vacio");
         }
-
     }
 
 }

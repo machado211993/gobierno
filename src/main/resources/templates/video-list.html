@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Videos</title>
+</head>
+<body>
+    <h1>Videos Disponibles</h1>
+    <ul>
+        <li th:each="video : ${videos}">
+            <a th:href="@{'/videos/' + ${video.id}}" th:text="${video.title}">Título del Video</a>
+        </li>
+    </ul>
+    <a href="/videos/upload">Subir Nuevo Video</a>
+</body>
+</html>

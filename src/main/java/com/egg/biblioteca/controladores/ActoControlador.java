@@ -88,10 +88,11 @@ public class ActoControlador {
     @GetMapping("/modificar/{idActo}")
     public String modificar(@PathVariable String idActo, ModelMap modelo) {
 
-        modelo.put("actos", actoServicio.getOne(idActo));
+        modelo.put("acto", actoServicio.getOne(idActo));
 
         return "acto_modificar.html";
     }
+    
 
     @PostMapping("/modificar/{idActo}")
     public String modificar(@PathVariable String idActo, String nombreActo, MultipartFile archivo,

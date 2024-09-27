@@ -96,7 +96,7 @@ public class AvisoControlador {
     @GetMapping("/modificar/{idAviso}")
     public String modificar(@PathVariable String idAviso, ModelMap modelo) {
 
-        modelo.put("avisos", avisoServicio.getOne(idAviso));
+        modelo.put("aviso", avisoServicio.getOne(idAviso));
 
         return "aviso_modificar.html";
     }

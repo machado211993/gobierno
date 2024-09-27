@@ -4,7 +4,6 @@ import com.egg.biblioteca.entidades.Acto;
 import com.egg.biblioteca.entidades.Evento;
 import com.egg.biblioteca.entidades.Obra;
 import com.egg.biblioteca.excepciones.MiException;
-import com.egg.biblioteca.repositorios.EventoRepositorio;
 import com.egg.biblioteca.servicios.ActoServicio;
 import com.egg.biblioteca.servicios.EventoServicio;
 import com.egg.biblioteca.servicios.ObraServicio;
@@ -48,11 +47,10 @@ public class EventoControlador {
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombreEvento, ModelMap modelo,
-            @RequestParam(required = false) MultipartFile archivo, @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(required = false) MultipartFile archivo) {
         try {
-            eventoServicio.crearEvento(archivo, nombreEvento, nombreEvento);
-            ;
+            eventoServicio.crearEvento(archivo, nombreEvento);
+            
             modelo.put("exito", "el evento fue cargada correctamente");
             List<Obra> obras = obraServicio.listarObras();
             modelo.addAttribute("obras", obras);

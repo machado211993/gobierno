@@ -15,38 +15,42 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SeguridadWeb extends WebSecurityConfigurerAdapter {
 
-        @Autowired
-        public UsuarioServicio usuarioServicio;
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
-        @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-                auth.userDetailsService(usuarioServicio)/// metodo userDetailsService
-                                .passwordEncoder(new BCryptPasswordEncoder()); // metodo passwordEncoder
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(usuarioServicio)
+            .passwordEncoder(new BCryptPasswordEncoder());
+    }
 
-        }
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-                http
-                                .authorizeRequests()
-                                .antMatchers("/admin/*").hasRole("ADMIN")
-                                .antMatchers("/css/*", "/js/*",
-                                                "/img                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           /*",
-                                                "/**")
-                                .permitAll()
-                                .and().formLogin()
-                                .loginPage("/login")
-                                .loginProcessingUrl("/logincheck")
-                                .usernameParameter("email")
-                                .passwordParameter("password")
-                                .defaultSuccessUrl("/inicio")
-                                .permitAll()
-                                .and().logout()
-                                .logoutUrl("/logout")
-                                .logoutSuccessUrl("/login")
-                                .permitAll()
-                                .and().csrf()
-                                .disable();
-
-        }
+    @Override
+protected void configure(HttpSecurity http) throws Exception {
+    http
+        .authorizeRequests()
+            // Permite acceso a los recursos estáticos en "/videos/**"
+            .antMatchers("/videos/**").permitAll()
+            // Acceso a recursos estáticos como CSS, JS, e imágenes
+            .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
+            // Rutas protegidas por rol ADMIN
+            .antMatchers("/admin/**").hasRole("ADMIN")
+            // Permite acceso a todas las demás rutas
+            .antMatchers("/**").permitAll()
+            .and()
+        .formLogin()
+            .loginPage("/login")
+            .loginProcessingUrl("/logincheck")
+            .usernameParameter("email")
+            .passwordParameter("password")
+            .defaultSuccessUrl("/inicio")
+            .permitAll()
+            .and()
+        .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/login")
+            .permitAll()
+            .and()
+        .csrf()
+            .disable(); // Considera habilitar CSRF en producción
 }
+ }
