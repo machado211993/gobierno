@@ -5,18 +5,18 @@
 <header th:replace="/fragments/header :: header"></header>
 
 <body>
-  <nav th:replace="/fragments/navbar :: nav"></nav>
+    <nav th:replace="/fragments/navbar :: nav"></nav>
     <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
-      <div class="card-body">
-        <h5 class="card-title">¡Éxito!</h5>
-        <p class="card-text" th:text="${exito}"></p>
-      </div>
+        <div class="card-body">
+            <h5 class="card-title">¡Éxito!</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
     </div>
     <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
-      <div class="card-body">
-        <h5 class="card-title">¡Error! 👎</h5>
-        <p class="card-text" th:text="${error}"></p>
-      </div>
+        <div class="card-body">
+            <h5 class="card-title">¡Error! 👎</h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
     </div>
     <hr class="my-4" style="border-top: 1px solid black;">
     <section class="mb-5 p-4">
@@ -24,93 +24,86 @@
             Obras Realizadas
         </h2>
         <div id="obras" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
-            <div class="card m-2 shadow" style="background-color: #f8f9fa; border: none; width: 18rem;" th:each="obra : ${obras}">
+            <div class="card m-2 shadow" style="background-color: #f8f9fa; border: none; width: 18rem;"
+                th:each="obra : ${obras}">
                 <div class="image-container position-relative">
-                    <img th:src="@{/obra/imagen/__${obra.idObra}__}" alt="Imagen de la obra" class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImageModal(this.src)">
-                    <div class="overlay-text position-absolute d-flex justify-content-center align-items-center" style="bottom: 0; left: 0; width: 100%; height: 50px; background-color: rgba(0, 0, 0, 0.7); color: white; font-size: 16px; font-weight: normal;">
+                    <img th:src="@{/obra/imagen/__${obra.idObra}__}" alt="Imagen de la obra"
+                        class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;"
+                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImageModal(this.src)">
+                    <div class="overlay-text position-absolute d-flex justify-content-center align-items-center"
+                        style="bottom: 0; left: 0; width: 100%; height: 50px; background-color: rgba(0, 0, 0, 0.7); color: white; font-size: 16px; font-weight: normal;">
                         <span th:text="${obra.nombreObra}"></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <hr class="my-4" style="border-top: 1px solid black;">
-    
+
     <section class="mb-5 p-4">
         <h2 class="section-title mb-4">
             Eventos Municipales
         </h2>
         <div id="eventos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
-            <div class="card m-2 shadow" style="background-color: #f8f9fa; border: none; width: 18rem;" th:each="evento : ${eventos}">
+            <div class="card m-2 shadow" style="background-color: #f8f9fa; border: none; width: 18rem;"
+                th:each="evento : ${eventos}">
                 <div class="image-container position-relative">
-                    <img 
-                        th:src="@{/evento/imagen/__${evento.idEvento}__}" 
-                        alt="Imagen del evento" 
-                        class="card-img-top img-fluid mx-auto" 
-                        style="height: 200px; object-fit: cover;" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#imageModal" 
-                        onclick="showImageModal(this.src)">
-                    <div class="overlay-text position-absolute d-flex justify-content-center align-items-center" style="bottom: 0; left: 0; width: 100%; height: 50px; background-color: rgba(0, 0, 0, 0.7); color: white; font-size: 16px; font-weight: normal;">
+                    <img th:src="@{/evento/imagen/__${evento.idEvento}__}" alt="Imagen del evento"
+                        class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;"
+                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImageModal(this.src)">
+                    <div class="overlay-text position-absolute d-flex justify-content-center align-items-center"
+                        style="bottom: 0; left: 0; width: 100%; height: 50px; background-color: rgba(0, 0, 0, 0.7); color: white; font-size: 16px; font-weight: normal;">
                         <span th:text="${evento.nombreEvento}"></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <hr class="my-4" style="border-top: 1px solid black;">
-    
+
     <section class="mb-5 p-4">
         <h2 class="section-title mb-4">
             Actos Oficiales
         </h2>
         <div id="actos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
-            <div class="card m-2 shadow" style="background-color: #f8f9fa; border: none; width: 18rem;" th:each="acto : ${actos}">
+            <div class="card m-2 shadow" style="background-color: #f8f9fa; border: none; width: 18rem;"
+                th:each="acto : ${actos}">
                 <div class="image-container position-relative">
-                    <img 
-                        th:src="@{/acto/imagen/__${acto.idActo}__}" 
-                        alt="Imagen del acto" 
-                        class="card-img-top img-fluid mx-auto" 
-                        style="height: 200px; object-fit: cover;" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#imageModal" 
-                        onclick="showImageModal(this.src)">
-                    <div class="overlay-text position-absolute d-flex justify-content-center align-items-center" style="bottom: 0; left: 0; width: 100%; height: 50px; background-color: rgba(0, 0, 0, 0.7); color: white; font-size: 16px; font-weight: normal;">
+                    <img th:src="@{/acto/imagen/__${acto.idActo}__}" alt="Imagen del acto"
+                        class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;"
+                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImageModal(this.src)">
+                    <div class="overlay-text position-absolute d-flex justify-content-center align-items-center"
+                        style="bottom: 0; left: 0; width: 100%; height: 50px; background-color: rgba(0, 0, 0, 0.7); color: white; font-size: 16px; font-weight: normal;">
                         <span th:text="${acto.nombreActo}"></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <hr class="my-4" style="border-top: 1px solid black;">
-    
+
     <section class="mb-5 p-4">
         <h2 class="section-title mb-4">
             Avisos Importantes
         </h2>
         <div id="avisos" class="d-flex justify-content-center align-items-center flex-wrap" style="width: 100%;">
-            <div class="card m-2 shadow" style="background-color: #f8f9fa; border: none; width: 18rem;" th:each="aviso : ${avisos}">
+            <div class="card m-2 shadow" style="background-color: #f8f9fa; border: none; width: 18rem;"
+                th:each="aviso : ${avisos}">
                 <div class="image-container position-relative">
-                    <img 
-                        th:src="@{/aviso/imagen/__${aviso.idAviso}__}" 
-                        alt="Imagen del aviso" 
-                        class="card-img-top img-fluid mx-auto" 
-                        style="height: 200px; object-fit: cover;" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#imageModal" 
-                        onclick="showImageModal(this.src)">
-                    <div class="overlay-text position-absolute d-flex justify-content-center align-items-center" style="bottom: 0; left: 0; width: 100%; height: 50px; background-color: rgba(0, 0, 0, 0.7); color: white; font-size: 16px; font-weight: normal;">
+                    <img th:src="@{/aviso/imagen/__${aviso.idAviso}__}" alt="Imagen del aviso"
+                        class="card-img-top img-fluid mx-auto" style="height: 200px; object-fit: cover;"
+                        data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImageModal(this.src)">
+                    <div class="overlay-text position-absolute d-flex justify-content-center align-items-center"
+                        style="bottom: 0; left: 0; width: 100%; height: 50px; background-color: rgba(0, 0, 0, 0.7); color: white; font-size: 16px; font-weight: normal;">
                         <span th:text="${aviso.nombreAviso}"></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    
     <!-- Modal para mostrar la imagen ampliada -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -121,24 +114,29 @@
             </div>
         </div>
     </div>
-    
-    
-      
-  <button id="toggleDarkMode">Modo Oscuro</button>
 
-  <button id="backToTop" style="display:none; position:fixed; bottom:20px; right:20px;">↑ Volver Arriba</button>
-  
-   <!-- Logo de WhatsApp -->
-   <a href="https://wa.me/1234567890" target="_blank">
-    <img th:src="@{/img/whatsap.png}" alt="WhatsApp" class="whatsapp-logo">
-  </a>
+    <button id="toggleDarkMode">Modo Oscuro</button>
+    <button id="backToTop" style="display:none; position:fixed; bottom:20px; right:20px;">↑ Volver Arriba</button>
+    <!-- Contenedor para los logos -->
+    <div class="social-logos">
+        <!-- Logo de WhatsApp -->
+        <a href="https://wa.me/1234567890" target="_blank">
+            <img th:src="@{/img/whatsap.png}" alt="WhatsApp" class="social-logo">
+        </a>
 
-  <footer th:replace="/fragments/footer :: footer"></footer>
+        <!-- Logo de Instagram -->
+        <a href="https://www.instagram.com/loreto_provincia_de_corrientes?igsh=MXNtbTVlaHF4ZjN1dg==" target="_blank">
+            <img th:src="@{/img/instagram.png}" alt="Instagram" class="social-logo" id="instagram">
+        </a>
+    </div>
+
+
+    <footer th:replace="/fragments/footer :: footer"></footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"></script>
-      <script th:src="@{/js/script.js}"></script>
-      <script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script th:src="@{/js/script.js}"></script>
+    <script>
         // Función para mostrar la imagen en el modal al hacer clic
         function showImageModal(src) {
             document.getElementById('modalImage').src = src;

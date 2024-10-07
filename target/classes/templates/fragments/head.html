@@ -11,27 +11,46 @@
     }
   </style>
   <style>
-    /* Estilos para el logo de WhatsApp */
-    .whatsapp-logo {
+    /* Estilo para el contenedor de logos */
+    .social-logos {
       position: fixed;
       bottom: 20px;
       /* Ubicación desde la parte inferior */
       right: 20px;
       /* Ubicación desde la derecha */
+      display: flex;
+      /* Usar flexbox para alinear horizontalmente */
+      align-items: center;
+      /* Centrar verticalmente los logos */
+      z-index: 1000;
+      /* Asegura que el contenedor esté por encima de otros elementos */
+    }
+
+    /* Estilos para los logos */
+    .social-logo {
       width: 80px;
       /* Tamaño del logo */
       height: 80px;
-      z-index: 1000;
-      /* Asegura que el logo esté por encima de otros elementos */
+      /* Tamaño del logo */
+      margin-left: 10px;
+      /* Espacio entre los logos */
+      transition: transform 0.2s;
+      /* Transición para el efecto hover */
+    }
+    #instagram{
+      /* Tamaño del logo */
+      width: 160px;
+      /* Tamaño del logo */
+      height: 88px;
     }
 
-    /* Opcional: efecto hover */
-    .whatsapp-logo:hover {
+    /* Efecto hover */
+    .social-logo:hover {
       transform: scale(1.1);
       /* Hace que el logo se agrande al pasar el cursor */
-      transition: transform 0.2s;
     }
   </style>
+
 
   <style>
     .custom-nav-link {
@@ -51,17 +70,25 @@
     }
   </style>
 
-<style>
-  .section-title {
-      background-color: #f8f9fa; /* Fondo claro */
-      border: 1px solid #ccc; /* Borde suave */
-      border-radius: 5px; /* Bordes redondeados */
-      padding: 15px; /* Espaciado interno */
-      text-align: center; /* Centrar el texto */
-      margin: 20px 0; /* Espaciado externo */
-      font-size: 2rem; /* Tamaño de fuente grande */
-      color: #343a40; /* Color de texto oscuro */
-  }
-</style>
+  <style>
+    .section-title {
+      background-color: #f8f9fa;
+      /* Fondo claro */
+      border: 1px solid #ccc;
+      /* Borde suave */
+      border-radius: 5px;
+      /* Bordes redondeados */
+      padding: 15px;
+      /* Espaciado interno */
+      text-align: center;
+      /* Centrar el texto */
+      margin: 20px 0;
+      /* Espaciado externo */
+      font-size: 2rem;
+      /* Tamaño de fuente grande */
+      color: #343a40;
+      /* Color de texto oscuro */
+    }
+  </style>
 
 </head>
